@@ -10,23 +10,15 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 	{
 		private Ticket[] _ticket;
 		private int _count = 0;
+		public string CinemaName { get; init; }
 		public int  Count => _count;
 
-		public Cinema(int capacity)
+		public Cinema(int capacity, string cinemaName)
 		{
 			_ticket = new Ticket[capacity];
+			CinemaName = cinemaName;
 		}
 
-		public bool AddTicket(Ticket ticket)
-		{
-			if (_count < _ticket.Length)
-			{
-				_ticket[_count] = ticket;
-				_count++;
-				return true;
-			}
-			return false;
-		}
 
 		public Ticket? this[int index]
 		{
@@ -64,5 +56,41 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 			}
 		}
 
+		public bool AddTicket(Ticket ticket)
+		{
+			if (_count < _ticket.Length)
+			{
+				_ticket[_count] = ticket;
+				_count++;
+				return true;
+			}
+			return false;
+		}
+
+		public void PrintAllTickets()
+		{
+			Console.WriteLine("========== All Tickets ==========");
+			for(int i = 0; i < _count;  i++)
+			{
+				Console.WriteLine(_ticket[i].ToString());
+			}
+		}
+
+		public void OpenCinema()
+		{
+			Console.WriteLine("========== Cinema Opened ==========");
+		}
+		public void CloseCinema()
+		{
+			Console.WriteLine("========== Cinema Closed ==========");
+		}
+		public void StatrProjector()
+		{
+			Console.WriteLine("Projector started.");
+		}
+		public void StopProjector()
+		{
+			Console.WriteLine("Projector stoped");
+		}
 	}
 }

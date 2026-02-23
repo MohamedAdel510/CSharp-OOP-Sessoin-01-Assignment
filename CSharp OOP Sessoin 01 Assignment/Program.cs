@@ -1,5 +1,7 @@
 ﻿using CSharp_OOP_Sessoin_01_Assignment.Enums;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Reflection.Metadata;
 
 namespace CSharp_OOP_Sessoin_01_Assignment
 {
@@ -15,7 +17,7 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 	{
 		static void Main(string[] args)
 		{
-			
+
 			#region Assignment 01
 			#region Part 01 : 
 
@@ -277,101 +279,174 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 
 			#region Part 02 : Practical (Extending the Movie Ticket Booking System)
 
-			Cinema cinema = new Cinema(3);
+			//Cinema cinema = new Cinema(3, "Normadi");
 
-			Console.WriteLine("========== Ticket Booking ==========\n");
+			//Console.WriteLine("========== Ticket Booking ==========\n");
 
-			for (int i = 0; i < 3; i++)
-			{
-				Console.WriteLine($"\nEnter Data For Ticket {i + 1}");
-				//ticket = new Ticket();
-				string name;
-				do
-				{
-					Console.Write("Enter Movie Name: ");
-					name = Console.ReadLine()!;
-				} while (string.IsNullOrWhiteSpace(name));
+			//for (int i = 0; i < 3; i++)
+			//{
+			//	Console.WriteLine($"\nEnter Data For Ticket {i + 1}");
+			//	//ticket = new Ticket();
+			//	string name;
+			//	do
+			//	{
+			//		Console.Write("Enter Movie Name: ");
+			//		name = Console.ReadLine()!;
+			//	} while (string.IsNullOrWhiteSpace(name));
 
-				bool isParsed;
-				Ticket_Type type;
+			//	bool isParsed;
+			//	Ticket_Type type;
 
-				do
-				{
-					Console.Write("Enter Ticket Type (0=Standard, 1=VIP, 2=IMAX): ");
-					isParsed = Enum.TryParse<Ticket_Type>(Console.ReadLine(), true, out type);
-				} while (!isParsed || !Enum.IsDefined(typeof(Ticket_Type), type));
-				//ticket.Type = type;
+			//	do
+			//	{
+			//		Console.Write("Enter Ticket Type (0=Standard, 1=VIP, 2=IMAX): ");
+			//		isParsed = Enum.TryParse<Ticket_Type>(Console.ReadLine(), true, out type);
+			//	} while (!isParsed || !Enum.IsDefined(typeof(Ticket_Type), type));
+			//	//ticket.Type = type;
 
-				string seat;
-				int number;
+			//	string seat;
+			//	int number;
 
-				do
-				{
-					Console.Write("Enter Seat Row (A, B, C, ..., Z): ");
-					seat = Console.ReadLine()!.ToUpper();
-				} while (seat.Length != 1 || string.IsNullOrWhiteSpace(seat));
+			//	do
+			//	{
+			//		Console.Write("Enter Seat Row (A, B, C, ..., Z): ");
+			//		seat = Console.ReadLine()!.ToUpper();
+			//	} while (seat.Length != 1 || string.IsNullOrWhiteSpace(seat));
 
-				do
-				{
-					Console.Write("Enter Seat Number: ");
-					isParsed = int.TryParse(Console.ReadLine(), out number);
-				} while (!isParsed);
-
-
+			//	do
+			//	{
+			//		Console.Write("Enter Seat Number: ");
+			//		isParsed = int.TryParse(Console.ReadLine(), out number);
+			//	} while (!isParsed);
 
 
-				double price;
-				do
-				{
-					Console.Write("Enter Price: ");
-					isParsed = double.TryParse(Console.ReadLine(), out price);
-				} while (!isParsed);
-
-				//ticket.Price = price;
 
 
-				cinema[i] = new Ticket(name, type, new(seat[0], number), price);
+			//	double price;
+			//	do
+			//	{
+			//		Console.Write("Enter Price: ");
+			//		isParsed = double.TryParse(Console.ReadLine(), out price);
+			//	} while (!isParsed);
 
-			}
+			//	//ticket.Price = price;
 
-			Console.WriteLine("\n=============== All Tickets ===============\n");
 
-			for (int i = 0; i < cinema.Count; i++)
-			{
+			//	cinema[i] = new Ticket(name, type, new(seat[0], number), price);
 
-				Console.WriteLine(cinema[i]?.ToString());
-			}
+			//}
 
-			Console.WriteLine("\n============= Search by Movie =============\n");
+			//Console.WriteLine("\n=============== All Tickets ===============\n");
 
-			string movieName;
-			do
-			{
-				Console.Write("Enter movie name to search: ");
-				movieName = Console.ReadLine()!;
-			} while (string.IsNullOrWhiteSpace(movieName));
+			//for (int i = 0; i < cinema.Count; i++)
+			//{
 
-			for (int i = 0; i < cinema.Count; i++)
-			{
-				if (cinema[i]?.MovieName?.ToLower() == movieName.ToLower())
-				{
-					Console.WriteLine($"Found: {cinema[i]?.ToString()}");
-				}
-			}
+			//	Console.WriteLine(cinema[i]?.ToString());
+			//}
 
-			Console.WriteLine("\n=======================\n");
-			Console.WriteLine($"Total Ticket Sold: {Ticket.GetTotalTicketsSold()}");
-			Console.WriteLine("\n=======================\n");
-			Console.WriteLine($"Book 1 Refrence: {BookingHelper.GenerateBookingReference()}");
-			Console.WriteLine($"Book 2 Refrence: {BookingHelper.GenerateBookingReference()}");
-			Console.WriteLine("\n=======================\n");
-			Console.WriteLine($"group discount for a group of 5 tickets at 80 EGP: {BookingHelper.CalcGroupDiscount(5, 80)}");
+			//Console.WriteLine("\n============= Search by Movie =============\n");
+
+			//string movieName;
+			//do
+			//{
+			//	Console.Write("Enter movie name to search: ");
+			//	movieName = Console.ReadLine()!;
+			//} while (string.IsNullOrWhiteSpace(movieName));
+
+			//for (int i = 0; i < cinema.Count; i++)
+			//{
+			//	if (cinema[i]?.MovieName?.ToLower() == movieName.ToLower())
+			//	{
+			//		Console.WriteLine($"Found: {cinema[i]?.ToString()}");
+			//	}
+			//}
+
+			//Console.WriteLine("\n=======================\n");
+			//Console.WriteLine($"Total Ticket Sold: {Ticket.GetTotalTicketsSold()}");
+			//Console.WriteLine("\n=======================\n");
+			//Console.WriteLine($"Book 1 Refrence: {BookingHelper.GenerateBookingReference()}");
+			//Console.WriteLine($"Book 2 Refrence: {BookingHelper.GenerateBookingReference()}");
+			//Console.WriteLine("\n=======================\n");
+			//Console.WriteLine($"group discount for a group of 5 tickets at 80 EGP: {BookingHelper.CalcGroupDiscount(5, 80)}");
+
+			#endregion
+
 
 			#endregion
 
 
+			#region Assignment 03
+
+			#region Part01 Theoretical Questions
+
+			#region Q1
+
+			//a) A University has Departments. If the university is closed, the departments no longer exist
+			// answer: Association - Composition.
+
+			//b) A Driver uses a Car.The driver does not own the car.
+			// answer: Dependancy
+
+			//c) A Dog is an Animal.
+			// answer: Inheritance
+
+
+			//d) A Team has Players. If the team is deleted, the players still exist.
+			// answer: Association - Aggregation
+
+			//e) A method receives a Logger as a parameter and calls it inside the method only.
+			// answer: Dependancy.
 			#endregion
 
+			#region Q2: Answer the following questions about access modifiers and sealed:
+
+			//a) A parent class has a protected field.Can a child class in a different assembly access it? What about through an object instance from outside?
+
+			// answer: child class canc access it in different assemby
+
+			//b) What is the difference between protected internal and private protected?
+
+			//answer:
+			// Protected internal: members are accessible in same assembly and child class in different assembly
+			// Private Protected: members are accessible in same class and child classes within the same assembly not outside it
+
+			//c) What does the sealed keyword do when applied to a class? What about when applied to a method?
+			// answer: 
+			// seald for a class this class can not be inherited 
+			// sealed for method this method cannot be overridden
+
+			//d) Can you create an object from a sealed class using new? Why or why not?
+			// yes, it allowed but can not inherit from it
+
+			#endregion
+
+			#endregion
+
+			#region Part 02 : Practical (Extending the Movie Ticket Booking System)
+
+			const int Size = 20;
+			Cinema cinema = new Cinema(Size, "Sun City");
+			cinema.OpenCinema();
+			cinema.StatrProjector();
+
+			Ticket standard = new Standardticket("Ay7aga");
+			Ticket vip = new VIPTicket(true, 20, "Avengers", Ticket_Type.VIP, new('B', 2), 180);
+			Ticket iMax = new IMAXTicket(true, "Dune", Ticket_Type.IMAX, new('C', 3), 200);
+
+			cinema.AddTicket(standard);
+			cinema.AddTicket(vip);
+			cinema.AddTicket(iMax);
+
+			cinema.PrintAllTickets();
+
+			Console.WriteLine("========== Statistics ==========");
+			Console.WriteLine($"Totoal Ticket Created: {Ticket.GetTotalTicketsSold()}");
+			Console.WriteLine();
+			Console.WriteLine($"Booking Ref 1: {BookingHelper.GenerateBookingReference()}");
+			Console.WriteLine($"Booking Ref 2: {BookingHelper.GenerateBookingReference()}");
+			#endregion
+
+			#endregion
 
 		}
 
