@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace CSharp_OOP_Sessoin_01_Assignment
 {
-	internal class IMAXTicket : Ticket
+	internal class IMAXTicket : Ticket, IPrintable, ICloneable
 	{
 		public bool  Is3D { get; set; }
 		private string Is_3D_Output => Is3D ? "Yes" : "NO";
 
-		public IMAXTicket(bool is3D, string MovieName, Ticket_Type Type, SeatLocation seatLocation, double Price) :
-			base(MovieName, Type, seatLocation, Price)
+		public IMAXTicket(bool is3D, string MovieName, Ticket_Type Type, SeatLocation seatLocation, double Price,bool status) :
+			base(MovieName, Type, seatLocation, Price, status)
 		{
 			Is3D = is3D;
 		}
@@ -29,6 +29,18 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 		{
 			return $"{base.PrintTicket()} | IMax 3D: {Is_3D_Output}";
 		}
+
+		#region Assignment 05
+		public  string Print()
+		{
+			return $"{base.PrintTicket()} | IMax 3D: {Is_3D_Output} | Booked: {StatusOutPut}";
+		}
+
+		public object Clone()
+		{
+			return new IMAXTicket(Is3D, MovieName, Type, seatLocation, Price, Status);
+		}
+		#endregion
 		#endregion
 	}
 }

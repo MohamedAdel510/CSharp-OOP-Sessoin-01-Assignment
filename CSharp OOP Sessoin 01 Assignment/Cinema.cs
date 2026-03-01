@@ -74,7 +74,17 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 			Console.WriteLine("========== All Tickets ==========");
 			for(int i = 0; i < _count;  i++)
 			{
+				//Console.WriteLine(_ticket[i].ToString());
 				Console.WriteLine(_ticket[i].PrintTicket());
+				//Console.WriteLine(_ticket[i].PrintTicket());
+			}
+		}
+		public static void PrintAllTickets(IPrintable[] printableTicket)
+		{
+			Console.WriteLine("--- All Tickets ---");
+			for(int i = 0; i < printableTicket.Length;  i++)
+			{
+				Console.WriteLine(printableTicket[i].Print());
 			}
 		}
 

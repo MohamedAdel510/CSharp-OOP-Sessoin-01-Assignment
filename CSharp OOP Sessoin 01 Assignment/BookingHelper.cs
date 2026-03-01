@@ -22,5 +22,14 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 			counter++;
 			return $"BK-{counter}";
 		}
+
+		public static void PrintAllPrintabelTicket(IPrintable[] tickets)
+		{
+			Console.WriteLine("========== All Tickets ==========");
+			for (int i = 0; i < tickets.Length; i++)
+			{
+				Console.WriteLine(tickets[i].Print());
+			}
+		}
 	}
 }

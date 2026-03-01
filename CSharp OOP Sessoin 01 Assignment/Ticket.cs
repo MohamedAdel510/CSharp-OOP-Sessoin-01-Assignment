@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CSharp_OOP_Sessoin_01_Assignment
 {
-	internal class Ticket
+	internal class Ticket 
 	{
 		//public string? MovieName { get; set; }
 		private string? _movieName;
@@ -17,6 +17,8 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 		private double _price;
 
 		public int TicketId { get; private set; }
+		protected bool Status { get; set; }
+		protected string StatusOutPut => Status ? "Yes" : "No";
 
 
 		// Assignment 02 Task2 
@@ -51,7 +53,7 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 
 		#endregion
 
-		public Ticket(string MovieName, Ticket_Type Type, SeatLocation seatLocation, double Price)
+		public Ticket(string MovieName, Ticket_Type Type, SeatLocation seatLocation, double Price, bool status)
 		{
 			this.MovieName = MovieName;
 			this.Type = Type;
@@ -59,10 +61,11 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 			this.Price = Price;
 			ticketCounter++;
 			TicketId = ticketCounter;
+			Status = status;
 		}
-		public Ticket(string Name) : this(Name, Ticket_Type.Standard, new SeatLocation('A', 1) , 50)
+		public Ticket(string Name) : this(Name, Ticket_Type.Standard, new SeatLocation('A', 1) , 50, true)
 		{
-			this.MovieName = Name;		
+			MovieName = Name;		
 		}
 
 		public Ticket(): this("Inception")
@@ -116,5 +119,20 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 		{
 			return $"Ticket #{TicketId} | {MovieName} | {Type} | {MovieName} | Seat: {seatLocation.ToString()} | Price: {Price} EGP| After Tax: {CalcTotal(14)} EGP";
 		}
+
+		#region Assignment 05
+
+		public void BookingTicket()
+		{
+			if(Status != true)
+				Status = true;
+		} 
+		public void CanceleTicket()
+		{
+			if(Status != false)
+				Status = false;
+		}
+
+		#endregion
 	}
 }

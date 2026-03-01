@@ -500,11 +500,139 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 			//Console.WriteLine(ProcessTicket(cinema[0]!));
 			//Console.WriteLine(ProcessTicket(cinema[1]!));
 			//Console.WriteLine(ProcessTicket(cinema[2]!));
-			
+
 
 			#endregion
 
 
+			#endregion
+
+
+			#region Assignment 05
+			#region Part 01 : Theoretical Questions
+			#region Q1 : What is an interface in C#? Why do we use interfaces instead of depending on concrete classes directly? Mention at least three benefits of using interfaces.
+			// interface is a code cotract between 2 developers that classes comes after must follow
+			// it spacifies what aclass can do not how it does it
+
+			//we use interface instead of depending on concrete classes directly :
+			//   => becouse any class comes after should implement the excact method in it.
+
+			// Benfits of interface 
+			//Enable polymorphism without inheritance
+			//Remove tight coupling between classes
+			//Enable multiple inheritance(behavior)
+			#endregion
+
+			#region Q2 : Look at the following code and answer the questions below:
+			//interface IEnglishSpeaker
+			//{
+			//	void Greet();
+			//}
+
+			//interface IArabicSpeaker
+			//{
+			//	void Greet();
+			//}
+
+			//class Translator : IEnglishSpeaker, IArabicSpeaker
+			//{
+			//	public void Greet()
+			//	{
+			//		Console.WriteLine("Hello / Ahlan");
+			//	}
+			//}
+
+
+			//a) What is the problem with this design? Both interfaces have a method called Greet() 
+			//	— how does the class handle it currently?
+
+			// the problem is to interfaces now have the same implementation both speaks two langouge.
+
+			// b)to fix it
+			//class Translator : IEnglishSpeaker, IArabicSpeaker
+			//{
+			//	void IEnglishSpeaker.EGreet()
+			//	{
+			//		Console.WriteLine("Hello");
+			//	}
+			//	void IArabicSpeaker.EGreet()
+			//	{
+			//		Console.WriteLine("Ahlan");
+			//	}
+			//}
+
+			//this technique called Explicit Implementation
+
+
+			//c) 
+
+			//IEnglishSpeaker speaker01 = new Translator();
+			//speaker01.Great();
+
+			//IArabicSpeaker speaker02 = new Translator();
+			//speaker01.Great();
+
+
+			// Or Casting
+			//Translator speaker03 = new Translator()
+			// (IEnglishSpeaker(speaker03)).Great();
+			// (IArabicSpeaker(speaker03)).Great();
+			#endregion
+
+			#region Q3 : Explain the difference between a shallow copy and a deep copy. When would you use each one? What is the risk of using a shallow copy when the object has reference-type fields?
+			// shallow copy : copy the object but copy only refrences for the refrence type fields
+			// deep Copy : copy the object data , the actual value to a new object located in memory not just refrences
+			//When would you use each one? it depends what type of copy needed (deep copy is brefered when we have shareable refrence)
+			//What is the risk of using a shallow copy when the object has reference - type fields ?
+			// any change of one of objects will effects the others
+			#endregion
+
+			#region Q4 : Look at the following code and determine the output. Explain why.
+			// Dev - Testing
+			// QA - Testing
+
+			// shallow copy will make copy of refrence of dept so e1 and e1 points to the same object dept in memory
+			// any change from one will effects the other one.
+			#endregion
+			#endregion
+
+			#region Part 02 : Practical (Extending the Movie Ticket Booking System)
+			const int Size = 20;
+			Cinema cinema = new Cinema(Size, "Sun City");
+			cinema.OpenCinema();
+			cinema.StatrProjector();
+
+
+
+			Standardticket standard = new Standardticket("A5", "Inception",Ticket_Type.Standard, new('A', 5), 150, true);
+			VIPTicket vip = new VIPTicket(true, 20, "Avengers", Ticket_Type.VIP, new('B', 2), 180, true);
+			IMAXTicket iMax = new IMAXTicket(true, "Dune", Ticket_Type.IMAX, new('C', 3), 200, true);
+
+			IPrintable[] printables = { standard, vip, iMax}; 
+
+			Cinema.PrintAllTickets(printables);
+
+			Console.WriteLine();
+			Console.WriteLine("--- Clone Test ---");
+			Standardticket standardClone = (Standardticket)standard.Clone();
+			
+			Console.WriteLine($"Original : {standard.Print()}");
+
+			standardClone.MovieName = "Ay7aga";
+			standardClone.CanceleTicket();
+			Console.WriteLine("After Changing Name: Ay7aga and cancele booking");
+			Console.WriteLine($"Original : {standard.Print()}");
+			Console.WriteLine($"Clone : {standardClone.Print()}");
+			Console.WriteLine();
+
+			Console.WriteLine("--- BookingHelper.PrintAll ---");
+			BookingHelper.PrintAllPrintabelTicket(printables);
+
+
+			cinema.StopProjector();
+			cinema.CloseCinema();
+
+			#endregion
 			#endregion
 
 		}

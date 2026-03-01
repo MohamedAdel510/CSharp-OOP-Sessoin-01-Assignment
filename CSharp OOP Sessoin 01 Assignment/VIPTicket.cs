@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace CSharp_OOP_Sessoin_01_Assignment
 {
-	internal class VIPTicket:Ticket
+	internal class VIPTicket:Ticket, IPrintable, ICloneable
 	{
 		public bool LongAccess { get; set; }
 		public decimal ServiceFee {  get; set; }
 
-		public VIPTicket(bool longAccess, decimal serviceFee, string MovieName, Ticket_Type Type, SeatLocation seatLocation, double Price) 
-			: base(MovieName, Type, seatLocation, Price)
+		public VIPTicket(bool longAccess, decimal serviceFee, string MovieName, Ticket_Type Type, SeatLocation seatLocation, double Price, bool status) 
+			: base(MovieName, Type, seatLocation, Price, status)
 		{
 			LongAccess = longAccess;
 			ServiceFee = serviceFee;
@@ -30,6 +30,18 @@ namespace CSharp_OOP_Sessoin_01_Assignment
 		{
 			return $"{base.PrintTicket()} | LongAcess: {LongAccess} | Service Fee: {ServiceFee}";
 		}
+
+		#region Assignment 05
+		public  string Print()
+		{
+			return $"{base.PrintTicket()} | LongAcess: {LongAccess} | Service Fee: {ServiceFee} | Booked: {StatusOutPut}";
+		}
+
+		public object Clone()
+		{
+			return new VIPTicket(LongAccess, ServiceFee, MovieName, Type, seatLocation, Price, Status);
+		}
+		#endregion
 		#endregion
 	}
 }
